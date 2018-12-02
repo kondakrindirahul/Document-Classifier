@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('form input').change(function() {
+                if ($("#doc").val() == '') {
+                    $('#sub').attr('disabled', 'disabled');
+                } else {
+                    $('#sub').removeAttr('disabled');
+                }
+            });
+        });
+        </script>
+</head>
+<body>
+    <nav class="navbar navbar_default" style="background-color: black">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="color: white">Mortgage Document Classifier</a>
+        </div>
+    </nav>
+    <form method="POST" action="/">
+        <div class="form-group col-md-6">
+            <label>Enter a Hashed Document</label><br>
+            <input type="text" class="form-control" id="doc" name="doc"><br>
+            <input id="sub" class="btn btn-primary" type="submit" value="submit" disabled="disabled">
+            <br />
+            <br />
+            {% if label %}
+            The predicted label for the document is <b>{{ label }}</b>, with a confidence<b> {{ confidence }}.</b>
+            {% endif %}
+        </div>
+    </form>
+    <br />
+    <br />
+
+</body>
+</html>
