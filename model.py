@@ -6,9 +6,6 @@ from sklearn import metrics
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.externals import joblib
 
-RFMODEL = 'rfClassifier.joblib'
-VECTORIZER = 'vectorizer.pkl'
-
 def trainModel():
     # load the csv data as a pandas data frame
     data = pd.read_csv('shuffled-full-set-hashed.csv', header=None, names=['label', 'hashed-document'])
@@ -25,8 +22,7 @@ def trainModel():
     fitted_vectorizer = vectorizer.fit_transform(train_docs)
 
     # use pickle to save the vectorizer to disk
-    # joblib.dump(vectorizer, VECTORIZER)
-    pickle.dump(vectorizer, open(VECTORIZER, "wb"))
+    pickle.dump(vectorizer, open('vectorizer.pkl', "wb"))
 
     # fit the random forest classification model on the training data
     rfClassifier = RandomForestClassifier(criterion='gini', n_estimators=50, min_samples_split=10, bootstrap=True, class_weight='balanced')
@@ -34,7 +30,7 @@ def trainModel():
     predicted_labels = rfClassifier.predict(vectorizer.transform(test_docs))
 
     # use pickle to save the classifier to disk
-    joblib.dump(rfClassifier, RFMODEL)
+    joblib.dump(rfClassifier, 'rfClassifier.joblib')
 
     print("Training Data Accuracy = ", metrics.accuracy_score(train_labels, rfClassifier.predict(fitted_vectorizer)))
     print("Test Data Accuracy = ", metrics.accuracy_score(test_labels, predicted_labels))

@@ -11,14 +11,12 @@ app = Flask(__name__)
 # predict the class for input hashed document
 def getPredictionConfidence(document):
     # load the saved tf-idf vectorizer from pickle file
-    # vectorizer = joblib.load(VECTORIZER)
-    # vectorizer = pickle.load(open(VECTORIZER, 'rb'))
-    with open(VECTORIZER, 'rb') as myFile:
+    with open('vectorizer.pkl', 'rb') as myFile:
         vectorizer = pickle.load(myFile)
     # convert input hashed document into a vector
     fitted_vectorizer = vectorizer.transform([document])
     # load the trained model from the pickle file
-    rfClassifier = joblib.load(RFMODEL)
+    rfClassifier = joblib.load('rfClassifier.joblib')
     # get the predicted label for input document
     labelPredicted = rfClassifier.predict(fitted_vectorizer)
 
