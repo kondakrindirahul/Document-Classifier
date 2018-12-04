@@ -25,7 +25,7 @@ def trainModel():
     pickle.dump(vectorizer, open('vectorizer.pkl', "wb"))
 
     # fit the random forest classification model on the training data
-    rfClassifier = RandomForestClassifier(criterion='gini', n_estimators=50, min_samples_split=10, bootstrap=True, class_weight='balanced')
+    rfClassifier = RandomForestClassifier(n_estimators=50, min_samples_split=10, bootstrap=True, class_weight='balanced')
     rfClassifier.fit(fitted_vectorizer, train_labels)
     predicted_labels = rfClassifier.predict(vectorizer.transform(test_docs))
 
