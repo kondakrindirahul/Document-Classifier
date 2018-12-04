@@ -3,9 +3,6 @@ import numpy as np
 import pickle
 from sklearn.externals import joblib
 
-RFMODEL = 'rfClassifier.joblib'
-VECTORIZER = 'vectorizer.pkl'
-
 app = Flask(__name__)
 
 # predict the class for input hashed document

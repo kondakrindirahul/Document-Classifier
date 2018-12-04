@@ -32,8 +32,8 @@ def trainModel():
     # use pickle to save the classifier to disk
     joblib.dump(rfClassifier, 'rfClassifier.joblib')
 
-    print("Training Data Accuracy = ", metrics.accuracy_score(train_labels, rfClassifier.predict(fitted_vectorizer)))
-    print("Test Data Accuracy = ", metrics.accuracy_score(test_labels, predicted_labels))
+    print("Training Data Accuracy: ", metrics.accuracy_score(train_labels, rfClassifier.predict(fitted_vectorizer)))
+    print("Test Data Accuracy: ", metrics.accuracy_score(test_labels, predicted_labels))
 
     confusion_matrix = pd.DataFrame(metrics.confusion_matrix(test_labels, predicted_labels), columns=rfClassifier.classes_, index=rfClassifier.classes_)
     confusion_matrix.to_csv('confusion_matrix.csv')
